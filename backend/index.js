@@ -7,8 +7,8 @@ require('./handlers/db');
 const mainRoute = require('./routes');
 const port = process.env.PORT || 3001;
 
-//app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 app.use(session({
     secret: 'somekey',// or any other secret key

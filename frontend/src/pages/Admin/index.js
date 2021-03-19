@@ -1,20 +1,56 @@
 import admin from '../../controllers/admin';
-import {useState, useEffect} from 'react';
+import { Component} from 'react';
 import('./style.css');
 
-function Admin() {
+class Admin extends Component{
 
-    const [userList, setUserList] = useState([]);
+    constructor(props){
+        super(props);
 
-    useEffect(() => {
+        this.state = {
+            userList:[]
+        };
+    }
+    
+    componentDidMount(){
         admin.getUsersList().then(res=>{
             if(res.status){
-                setUserList(res.data);
+                
+                this.setState({
+                    userList: res.data
+                });
             }
         });
-    }, []);
 
+        this.onDeleteHandler = this.onDeleteHandler.bind(this);
+        this.listRefresh = this.listRefresh.bind(this);
+    }
 
+    onDeleteHandler(e){
+        const email = e.currentTarget.getAttribute('data-email');
+        console.log(email);
+        admin.deleteUser(email).then(response=>{
+            if(response.status){
+                this.listRefresh(email);
+            }
+        })
+    }
+
+    listRefresh(email){
+        const userList = this.state.userList;
+        const newUserList = [];
+        userList.forEach((user)=>{
+            if(user.email !== email) {
+                newUserList.push(user)
+            }
+        });
+
+        this.setState({
+            userList:newUserList
+        })
+    }
+
+    render(){
     return (
       <>
 
@@ -22,7 +58,7 @@ function Admin() {
 
         <div className="list-blocks">
         
-        {userList.map(user=>(
+        {this.state.userList.map(user=>(
             <div className="list-item">
 
                 <div className="item-details">
@@ -31,15 +67,16 @@ function Admin() {
                 </div>
 
                 <div className="item-actions">
-                    <input type="button" className="btn btn-normal" value="Edit" />
-                    <input type="button" className="btn btn-danger" value="Delete" />
+                    {/* <input type="button" className="btn btn-normal" value="Edit" disabled /> */}
+                    <input type="button" className="btn btn-danger" onClick={this.onDeleteHandler} data-email={user.email} value="Delete" />
                 </div>
             </div>
         ))}
 
         </div>
       </>
-    );
+    )
+        }
   }
 
   export default Admin;

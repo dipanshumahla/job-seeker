@@ -32,6 +32,7 @@ class Login extends React.Component{
     handleFormSubmit() {
         user.login(this.state).then(response=>{
             if(response.status){
+                console.log(response)
                 this.props.setToken(response.token);
                 this.props.history.push('/seeker/dashboard');
             }

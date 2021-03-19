@@ -1,12 +1,12 @@
 const User = require('../models/user');
 const mongoose = require('mongoose');
 
-const getInfo = async (userId)=>{
+const getInfo = async (email)=>{
     const response = {
         status: false
     }
-    
-    const result = await User.findOne({'email':userId});
+    console.log(email,'hello')
+    const result = await User.findOne({'email':email});
     
     if(!result) return response;
     response.status = true;
@@ -26,12 +26,12 @@ const edit = async ({userId, userName, userMail})=>{
     return response;
 }
 
-const deleteProfile = async (userId)=>{
+const deleteProfile = async (email)=>{
     const response = {
         status:false
     }
 
-    const result = await User.findByIdAndDelete(userId);
+    const result = await User.findOneAndDelete({email:email});
 
     if(!result) return response;
     response.status = true;

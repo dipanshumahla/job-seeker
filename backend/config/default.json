@@ -1,5 +1,5 @@
 {
     "database":{
-        "url":"mongodb_url"
+        "url":"mongodb+srv://kevinhart:somepassd@firstp.1r3v1.mongodb.net/datahub?authSource=admin&ssl=true"
     }
 }

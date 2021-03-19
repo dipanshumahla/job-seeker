@@ -36,7 +36,7 @@ const register = async ({name, email, password})=>{
   return response.data;
 }
 
-const uploadCV = async (file)=>{
+const uploadCV = async (file, email)=>{
   const formData = new FormData();
     
       formData.append(
@@ -44,6 +44,7 @@ const uploadCV = async (file)=>{
         file,
         file.name
       );
+      formData.append('email', email)
         console.log(file);
     
         const response = await axios.post("http://localhost:3001/api/user/upload", formData);

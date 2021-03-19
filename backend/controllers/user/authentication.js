@@ -4,7 +4,7 @@ const login = (req,res)=>{
     
     const userMail = req.body.userMail;
     const userPassword = req.body.userPassword;
-
+    
     db.login({userMail, userPassword}).then(response=>{
         if(response.status){
 
@@ -13,8 +13,9 @@ const login = (req,res)=>{
             req.session.email = response.data.email;
             req.session.token = token;
             
-            response.token = token;
+            response.token = response.data.email;
         }
+        
             res.json(response);
     }).catch(e=>{
         console.log(e);

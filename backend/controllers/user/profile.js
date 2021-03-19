@@ -17,9 +17,9 @@ const edit = (req,res)=>{
 }
 
 const deleteProfile = (req,res)=>{
-    const userId = req.body.userId;
-
-    db.deleteProfile(userId).then(response=>{
+    const email = req.body.email;
+    console.log(email)
+    db.deleteProfile(email).then(response=>{
             res.json(response);
     }).catch(e=>{
         console.log(e);
@@ -29,10 +29,10 @@ const deleteProfile = (req,res)=>{
 
 
 const getInfo=(req,res)=>{
-    console.log(req.body, req.session)
-    if(req.body.token != req.session.token) return res.json({status:false});
+    console.log(req.body.token, req.session.token)
+    //if(req.body.token != req.session.token) return res.json({status:false});
 
-    db.getInfo(req.session.email).then(response=>{
+    db.getInfo(req.body.token).then(response=>{
         res.json(response);
     }).catch(e=>{
         console.log(e);

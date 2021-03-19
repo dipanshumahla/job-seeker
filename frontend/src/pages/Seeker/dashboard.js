@@ -33,7 +33,7 @@ class Homepage extends Component{
   };
 
   onFileUpload = () => {
-    user.uploadCV(this.state.cvFile);
+    user.uploadCV(this.state.cvFile,this.props.token);
   };
 
   render(){
