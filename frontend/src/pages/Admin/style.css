@@ -1,0 +1,36 @@
+
+.list-blocks{
+    display: flex;
+    flex-direction: column;
+}
+
+.list-item{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    background-color: #ccc;
+    border-radius: 4px;
+    padding: 50px;
+}
+
+.btn{
+    cursor: pointer;
+    padding: 10px 20px;
+    border:none;
+    border-radius: 2px;
+    margin-left: 20px;
+}
+
+.btn:hover{
+    box-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+}
+
+.btn-normal{
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-danger{
+    background-color: rgb(219, 33, 33);
+    color: white;
+}
